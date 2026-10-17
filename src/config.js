@@ -1,0 +1,1 @@
+export const BASE_URL = 'https://focusflow-backend-production-12af.up.railway.app/api';

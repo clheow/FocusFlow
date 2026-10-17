@@ -1,0 +1,136 @@
+:root {
+  /* Warna — Light mode (default) */
+  --ff-bg: #F5F3FF;
+  --ff-surface: #FFFFFF;
+  --ff-primary: #6C5CE7;
+  --ff-primary-dark: #5647C7;
+  --ff-ink: #2D2A4A;
+  --ff-ink-soft: #6B6890;
+  --ff-accent-warm: #FFB020;
+  --ff-success: #34C77B;
+
+  /* Tipografi */
+  --ff-font-body: 'Inter', -apple-system, sans-serif;
+  --ff-font-pixel: 'Silkscreen', monospace;
+
+  /* Bentuk & bayangan */
+  --ff-card-radius: 16px;
+  --ff-shadow-hard: 4px 4px 0 rgba(45, 42, 74, 0.12);
+  --ff-shadow-hard-sm: 3px 3px 0 rgba(45, 42, 74, 0.12);
+
+  /* Ionic overrides */
+  --ion-color-primary: var(--ff-primary);
+  --ion-color-primary-rgb: 108, 92, 231;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-shade: var(--ff-primary-dark);
+  --ion-color-primary-tint: #7d6ff0;
+  --ion-background-color: var(--ff-bg);
+  --ion-text-color: var(--ff-ink);
+  --ion-font-family: var(--ff-font-body);
+}
+
+/* Dark mode — mengikuti setting sistem HP otomatis */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ff-bg: #16152B;
+    --ff-surface: #221F3D;
+    --ff-primary: #9B8CFF;
+    --ff-primary-dark: #7B6CE0;
+    --ff-ink: #EDEBFF;
+    --ff-ink-soft: #A6A3C9;
+    --ff-accent-warm: #FFC24D;
+    --ff-success: #4ADE80;
+
+    --ion-color-primary: var(--ff-primary);
+    --ion-color-primary-rgb: 155, 140, 255;
+    --ion-color-primary-contrast: #16152B;
+    --ion-color-primary-shade: var(--ff-primary-dark);
+    --ion-color-primary-tint: #ac9fff;
+    --ion-background-color: var(--ff-bg);
+    --ion-text-color: var(--ff-ink);
+
+    --ion-item-background: var(--ff-surface);
+    --ion-toolbar-background: var(--ff-surface);
+    --ion-card-background: var(--ff-surface);
+  }
+}
+
+body {
+  font-family: var(--ff-font-body);
+}
+
+/* ===== Tombol bergaya pixel — berlaku global ke semua ion-button ===== */
+ion-button {
+  font-weight: 700;
+  --border-radius: 10px;
+}
+
+ion-button::part(native) {
+  border-radius: 10px;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+/* Tombol solid (default & fill="solid") */
+ion-button:not([fill='clear']):not([fill='outline'])::part(native) {
+  border: 2px solid var(--ff-ink);
+  box-shadow: 3px 3px 0 var(--ff-ink);
+}
+
+/* Tombol outline */
+ion-button[fill='outline']::part(native) {
+  border-width: 2px;
+  box-shadow: 3px 3px 0 var(--ff-ink);
+}
+
+/* Efek "ditekan" ala tombol pixel/game */
+ion-button:not([fill='clear']):active::part(native) {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--ff-ink);
+}
+
+ion-button[disabled]::part(native) {
+  box-shadow: none;
+  border-color: var(--ff-ink-soft);
+  opacity: 0.5;
+}
+
+/* Toolbar & konten ikut tema, tidak dibiarkan default putih di dark mode */
+ion-toolbar {
+  --background: var(--ff-bg);
+  --color: var(--ff-ink);
+}
+
+ion-content {
+  --background: var(--ff-bg);
+  --color: var(--ff-ink);
+}
+
+/* ===== Toast bergaya pixel — dipakai lewat cssClass saat toastController.create() ===== */
+.pixel-toast {
+  --border-radius: 10px;
+  --box-shadow: none;
+  font-family: var(--ff-font-body);
+  font-weight: 600;
+}
+
+.pixel-toast::part(container) {
+  border: 2px solid var(--ff-ink);
+  border-radius: 10px;
+  box-shadow: 4px 4px 0 var(--ff-ink);
+}
+
+/* Warna memakai properti CSS biasa (bukan custom property) karena ::part() tidak bisa set --background */
+.pixel-toast.pixel-toast--success::part(container) {
+  background: var(--ion-color-success, #2dd36f);
+  color: #ffffff;
+}
+
+.pixel-toast.pixel-toast--levelup::part(container) {
+  background: var(--ion-color-tertiary, #5260ff);
+  color: #ffffff;
+}
+
+.pixel-toast.pixel-toast--warning::part(container) {
+  background: var(--ion-color-warning, #ffc409);
+  color: #000000;
+}

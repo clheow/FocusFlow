@@ -1,0 +1,7 @@
+{
+  "name": "FocusFlow-App",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
